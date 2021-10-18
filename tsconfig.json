@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": { "*": ["types/*"] },
+    "target": "es6",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "dist",
+    "lib": ["esnext", "dom"],
+    "resolveJsonModule": true,
+    "skipLibCheck": true
+  }
+}

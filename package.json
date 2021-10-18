@@ -1,0 +1,55 @@
+{
+  "name": "discord-support-threads",
+  "version": "1.0.0",
+  "repository": "git@github.com:sct/discord-support-threads.git",
+  "author": "Ryan Cohen <ryan@sct.dev>",
+  "license": "MIT",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist",
+    "dev": "nodemon -e ts -x ts-node src/index.ts",
+    "debug": "nodemon -e ts -x ts-node --inspect src/index.ts",
+    "build": "rimraf dist && tsc",
+    "test": "yarn run lint",
+    "lint": "eslint \"src/**/*.{js,ts}\" --ignore-path .gitignore",
+    "prettier": "prettier --write \"src/**/*.{js,ts}\""
+  },
+  "dependencies": {
+    "discord.js": "^13.2.0",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.3",
+    "nodemon": "^2.0.13",
+    "prettier": "^2.4.1",
+    "ts-node": "^10.3.0",
+    "typescript": "^4.4.4"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{ts,js}": [
+      "prettier --write",
+      "eslint"
+    ],
+    "**/*.{json,md}": [
+      "prettier --write"
+    ]
+  }
+}
