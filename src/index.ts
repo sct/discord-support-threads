@@ -28,12 +28,14 @@ client.on('messageCreate', async (message) => {
     guild.members.cache.get(message.author.id).displayName ??
     message.author.username;
 
-  const thread = await message.channel.threads.create({
+  const thread = await message.startThread({
     name: displayName,
     autoArchiveDuration: 'MAX',
     reason: 'Creating a support thread',
   });
-  await thread.members.add(message.author.id);
+
+  // Not necessary if its a reply thread
+  // await thread.members.add(message.author.id);
   thread.send(
     `Hi there! I have created this support thread for you. While awaiting a response, please be sure to review the Overseerr support guide and share any relevant logs/details: https://docs.overseerr.dev/support/need-help`
   );
