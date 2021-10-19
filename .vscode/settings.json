@@ -1,0 +1,13 @@
+
+{
+  "eslint.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "editor.formatOnSave": true
+}
