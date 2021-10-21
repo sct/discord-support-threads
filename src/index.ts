@@ -5,11 +5,42 @@ import {
   Snowflake,
   ThreadChannel,
 } from 'discord.js';
+import fs from 'fs';
+import merge from 'lodash/merge';
+import path from 'path';
 import config from './config';
 import { registerSlashCommands } from './registerSlashCommands';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const messages = require('../config/messages.json');
+const MESSAGES_PATH = path.join(__dirname, '../config/messages.json');
+
+const defaultMessages = {
+  threadCreated:
+    'Hi there! I have created this support thread for you. While awaiting a response, please be sure to review the Overseerr support guide and share any relevant logs/details: https://docs.overseerr.dev/support/need-help',
+  threadResolveHint:
+    'If you no longer need assistance, please use the `/resolve` command to archive this thread.',
+  threadResolved:
+    "It appears that your problem has been resolved, so I've archived this thread. If you require further assistance with this issue, simply reply to unarchive the thread. If you have a question unrelated to your original inquiry, please open a new thread by posting in #support!",
+  errorNotThread: 'You can only use this command inside of a support thread.',
+  errorNoPermission:
+    'You do not have permission to perform this action. Is this your support thread?',
+};
+
+const loadMessages = (): typeof defaultMessages => {
+  let data = {};
+  if (fs.existsSync(MESSAGES_PATH)) {
+    data = JSON.parse(fs.readFileSync(MESSAGES_PATH, 'utf-8'));
+  }
+
+  let messages = defaultMessages;
+
+  messages = merge(defaultMessages, data);
+
+  fs.writeFileSync(MESSAGES_PATH, JSON.stringify(messages, undefined, ' '));
+
+  return messages;
+};
+
+const messages = loadMessages();
 const client = new Client({
   intents: [
     Intents.FLAGS.GUILDS,
