@@ -25,7 +25,7 @@
   "devDependencies": {
     "@types/lodash": "^4.14.176",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
+    "@typescript-eslint/parser": "^5.8.0",
     "babel-eslint": "^10.1.0",
     "discord-api-types": "^0.24.0",
     "eslint": "^8.0.1",
