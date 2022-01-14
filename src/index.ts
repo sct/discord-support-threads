@@ -15,7 +15,7 @@ const MESSAGES_PATH = path.join(__dirname, '../config/messages.json');
 
 const defaultMessages = {
   threadCreated:
-    'Hi there! I have created this support thread for you. While awaiting a response, please be sure to review the Overseerr support guide and share any relevant logs/details: https://docs.overseerr.dev/support/need-help',
+    'Hi there! I have created this support thread for you. While awaiting a response, please be sure to review our support guidelines.',
   threadResolveHint:
     'If you no longer need assistance, please use the `/resolve` command to archive this thread.',
   threadResolved:
@@ -72,22 +72,26 @@ client.on('messageCreate', async (message) => {
     return;
   }
 
-  const guild = client.guilds.cache.get(message.guild.id);
+  try {
+    const guild = client.guilds.cache.get(message.guild.id);
 
-  const displayName =
-    guild.members.cache.get(message.author.id).displayName ??
-    message.author.username;
+    const displayName =
+      guild.members.cache.get(message.author.id).displayName ??
+      message.author.username;
 
-  const thread = await message.startThread({
-    name: displayName,
-    autoArchiveDuration: 1440,
-    reason: 'Creating a support thread',
-  });
+    const thread = await message.startThread({
+      name: displayName,
+      autoArchiveDuration: 1440,
+      reason: 'Creating a support thread',
+    });
 
-  await thread.send(messages.threadCreated);
-  await thread.send(messages.threadResolveHint);
+    await thread.send(messages.threadCreated);
+    await thread.send(messages.threadResolveHint);
 
-  console.log(`Created a thread: ${thread.name}`);
+    console.log(`Created a thread: ${thread.name}`);
+  } catch (error) {
+    console.log('Something went wrong creating a thread', error);
+  }
 });
 
 client.on('interactionCreate', async (interaction) => {

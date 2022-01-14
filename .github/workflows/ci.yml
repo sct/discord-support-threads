@@ -1,4 +1,4 @@
-name: Overseerr CI
+name: Discord Support Threads CI
 
 on:
   pull_request:
