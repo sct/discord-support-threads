@@ -12,6 +12,7 @@ docker run -d \
   --name discord-support-threads \
   -e BOT_TOKEN=YourDiscordBotToken \
   -e CHANNEL_ID=SupportChannelID \
+  -e GUILD_ID=ServerID \ # Optional, only needed if you have trouble registering slash commands
   -v /path/to/appdata/config:/app/config \
   --restart unless-stopped \
   ghcr.io/sct/discord-support-threads
