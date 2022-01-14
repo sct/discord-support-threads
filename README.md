@@ -19,4 +19,4 @@ docker run -d \
 ```
 
 - The bot will create a `settings.json` file in your mounted folder which you can edit to customize the support messages the bot will send.
-- Restart the bot after customizing the messages and you are good to go!
+- Restart the bot after customizing the messages and invite the bot to your server. (There should be an invite link ready for you in the stdout logs!)
